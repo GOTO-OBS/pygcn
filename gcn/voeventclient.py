@@ -160,6 +160,8 @@ def _ingest_packet(sock, ivorn, handler, log):
                          'Transport')]:
             if "role" not in root.attrib:
                 log.error("receieved transport message without a role")
+            elif root.attrib["role"] == "authenticate":
+                log.debug("received authenticate message")
             elif root.attrib["role"] == "iamalive":
                 log.debug("received iamalive message")
                 _send_packet(sock, _form_response("iamalive",
