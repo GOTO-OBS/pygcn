@@ -154,8 +154,10 @@ def _ingest_packet(sock, ivorn, handler, log):
                       base64.b64encode(payload))
         raise
     else:
-        if root.tag == ('{http://telescope-networks.org/schema/Transport/v1.1}'
-                        'Transport'):
+        if root.tag in [('{http://telescope-networks.org/schema/Transport/v1.1}'
+                         'Transport'),
+                        ('{http://www.telescope-networks.org/xml/Transport/v1.1}'
+                         'Transport')]:
             if "role" not in root.attrib:
                 log.error("receieved transport message without a role")
             elif root.attrib["role"] == "iamalive":
